@@ -158,7 +158,10 @@ class T5TransformerLayer(keras.layers.Layer):
         x = self.dropout_layer(x, training=training)
         x = x + residual
 
-        if not self.is_decoder and not self.self_attention.use_relative_attention_bias:
+        if (
+            not self.is_decoder
+            and not self.self_attention.use_relative_attention_bias
+        ):
             return x, position_bias
         else:
             return x
@@ -187,7 +190,10 @@ class T5TransformerLayer(keras.layers.Layer):
                 shape=(None, self.self_attention.num_heads, None, None),
                 dtype=hidden_states.dtype,
             )
-        if not self.is_decoder and not self.self_attention.use_relative_attention_bias:
+        if (
+            not self.is_decoder
+            and not self.self_attention.use_relative_attention_bias
+        ):
             return output, new_position_bias
         else:
             return output
